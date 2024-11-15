@@ -257,11 +257,13 @@ const emailCheck = async (req, res) => {
 };
 
 // Do this from Flutter
-const logoutUser = (_, res) => {
+const logoutUser = (req, res) => {
+	// Clear the token by setting it to an empty string or null
 	res
-		.header("auth-token", "")
-		.json({ message: "User Logged In", "auth-token": authToken });
-};
+	  .header("auth-token", "") // Clear the token from the header
+	  .status(200) // OK status
+	  .json({ message: "User Logged Out", "auth-token": "" });
+  };
 
 //Create JWT Token as an auth-token. So users do not have to login again and again.
 //token expires in 30 days. //! Try to implement Refresh Tokens as well
